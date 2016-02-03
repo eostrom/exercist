@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form #setForm="ngForm" (ngSubmit)="addSet()">
+            <fieldset class="form-group">
+                <label for="exercise">Exercise</label>
+                <input type="text" class="form-control"
+                       required
+                       id="exercise" ngControl="exercise"
+                       [(ngModel)]="set.exercise">
+
+                <!--
+                <select class="form-control"
+                        [(ngModel)]="set.exercise"
+                        ngControl="exercise" #exercise="ngForm"
+                >
+                    <option *ngFor="#ex of exercises"
+                            [value]="ex">
+                        {{ex}}
+                    </option>
+                </select>
+                -->
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="weight">Weight (lbs)</label>
+                <input type="number" class="form-control"
+                       required min="0.25" step="0.25"
+                       id="weight" ngControl="weight"
+                       [(ngModel)]="set.weight">
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label for="reps">Reps (x)</label>
+                <input type="number" class="form-control"
+                       required
+                       id="reps" ngControl="reps"
+                        [(ngModel)]="set.reps">
+            </fieldset>
+
+            <pre>{{set | json}}</pre>
+            <div *ngIf="set.exercise">{{set.exercise}}</div>
+
+            <fieldset class="form-group">
+                <button type="submit" class="btn btn-primary"
+                        [disabled]="!setForm.form.valid">
+                    Add Set
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>

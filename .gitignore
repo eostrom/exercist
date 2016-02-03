@@ -15,4 +15,13 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# RubyMine/WebStorm/JetBrains configuration.
 .idea/
+
+# npm packages.
+node_modules
+
+# Generated from TypeScript source.
+public/app/**/*.js
+public/app/**/*.js.map
