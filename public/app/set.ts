@@ -1,6 +1,6 @@
 export class ExerciseSet {
     constructor(
-        public exercise:string,
+        public exercise_name:string,
         public weight:number,
         public reps:number
     ) { }
