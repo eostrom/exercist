@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {Http, Response, RequestOptions} from "angular2/http";
+import {Http, Response, Headers} from "angular2/http";
 import {Observable} from "rxjs/Observable";
 import {ExerciseSet} from './set'
 
@@ -9,13 +9,15 @@ export class SetService {
 
     private _setsUrl = '/exercise_sets.json';
 
-    addSet(set: ExerciseSet) : Observable<Set> {
+    addSet(set: ExerciseSet) : Observable<ExerciseSet> {
+        var jsonHeaders = new Headers({
+            'Content-Type': 'application/json'
+        })
+
         return this.http.post(this._setsUrl,
             JSON.stringify({exercise_set: set}),
             {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: jsonHeaders
             }
         )
             .map(res => <ExerciseSet> res.json().data)
