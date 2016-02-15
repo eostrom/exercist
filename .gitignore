@@ -20,7 +20,7 @@
 .idea/
 
 # npm packages.
-node_modules
+/node_modules
 
 # Generated from TypeScript source.
 public/app/**/*.js
