@@ -48,3 +48,11 @@
         </form>
     </div>
 </div>
+
+<div class="row" *ngFor="#set of sets">
+    <div class="col-xs-12">
+        {{set.created_at | date:'medium'}}
+        {{set.exercise_name}}
+        {{set.weight}}x{{set.reps}}
+    </div>
+</div>

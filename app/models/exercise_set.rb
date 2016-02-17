@@ -10,6 +10,8 @@ class ExerciseSet < ApplicationRecord
   validates :exercise,
     presence: true
 
+  delegate :name, to: :exercise, prefix: true
+
   def exercise_name=(name)
     self.exercise = Exercise.find_or_create_by(name: name) if name.present?
   end

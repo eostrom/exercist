@@ -1,4 +1,8 @@
 class ExerciseSetsController < ApplicationController
+  def index
+    render json: ExerciseSet.order('created_at desc')
+  end
+
   def create
     @set = ExerciseSet.create(set_params)
 

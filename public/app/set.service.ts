@@ -9,6 +9,18 @@ export class SetService {
 
     private _setsUrl = '/exercise_sets.json';
 
+    getSets() : Observable<ExerciseSet[]> {
+        return this.http.get(this._setsUrl)
+            .map(res =>
+                <ExerciseSet[]> res.json().map(set => {
+                    set.weight = Number.parseFloat(set.weight);
+                    set.created_at = Date.parse(set.created_at);
+                    return set
+                })
+            )
+            .catch(this.handleError);
+    }
+
     addSet(set: ExerciseSet) : Observable<ExerciseSet> {
         var jsonHeaders = new Headers({
             'Content-Type': 'application/json'
