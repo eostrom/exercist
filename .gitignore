@@ -25,3 +25,4 @@
 # Generated from TypeScript source.
 public/app/**/*.js
 public/app/**/*.js.map
+/typings
