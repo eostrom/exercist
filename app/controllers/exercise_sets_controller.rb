@@ -9,6 +9,14 @@ class ExerciseSetsController < ApplicationController
     render json: @set
   end
 
+  def update
+    @set = ExerciseSet.find(params[:id])
+
+    @set.update(set_params)
+
+    render json: @set
+  end
+
   private
 
   def set_params

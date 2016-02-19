@@ -19,7 +19,7 @@ import {SetService} from './set.service';
 export class AppComponent {
     constructor(private _setService: SetService) {}
 
-    set = new ExerciseSet('Chest press', 80, 10)
+    set: ExerciseSet;
     sets: ExerciseSet[];
 
     exercises = [
@@ -27,7 +27,9 @@ export class AppComponent {
         'Chest press'
     ]
 
-    ngOnInit() { this.getSets() }
+    ngOnInit() { this.reset(); this.getSets() }
+
+    reset() { this.set = new ExerciseSet() }
 
     getSets() {
         this._setService.getSets()
@@ -36,11 +38,11 @@ export class AppComponent {
             );
     }
 
-    addSet() {
+    saveSet() {
         console.log(this.set)
-        this._setService.addSet(this.set)
+        this._setService.saveSet(this.set)
             .subscribe(
-                set => console.log(set),
+                set => this.reset(),
                 error => console.log(error)
             )
     }

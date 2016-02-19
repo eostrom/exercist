@@ -7,32 +7,42 @@ import {ExerciseSet} from './set'
 export class SetService {
     constructor(private http: Http) {}
 
-    private _setsUrl = '/exercise_sets.json';
+    private _setsUrl = '/exercise_sets';
+
+    private jsonToSet(json) : ExerciseSet {
+        return new ExerciseSet(
+            Object.assign({}, json, {
+                weight: Number.parseFloat(json.weight),
+                created_at: Date.parse(json.created_at)
+            })
+        )
+    }
 
     getSets() : Observable<ExerciseSet[]> {
         return this.http.get(this._setsUrl)
             .map(res =>
-                <ExerciseSet[]> res.json().map(set => {
-                    set.weight = Number.parseFloat(set.weight);
-                    set.created_at = Date.parse(set.created_at);
-                    return set
-                })
+                res.json().map(this.jsonToSet)
             )
             .catch(this.handleError);
     }
 
-    addSet(set: ExerciseSet) : Observable<ExerciseSet> {
+    saveSet(set: ExerciseSet) : Observable<ExerciseSet> {
         var jsonHeaders = new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application.json'
         })
 
-        return this.http.post(this._setsUrl,
+        var action = set.persisted() ? 'patch' : 'post';
+        var url = this._setsUrl;
+        if (set.persisted()) { url += `/${set.id}` }
+
+        return this.http[action](url,
             JSON.stringify({exercise_set: set}),
             {
                 headers: jsonHeaders
             }
         )
-            .map(res => <ExerciseSet> res.json().data)
+            .map(res => this.jsonToSet(res.json()))
             .catch(this.handleError)
     }
 
