@@ -22,6 +22,8 @@ export class AppComponent {
     set: ExerciseSet;
     sets: ExerciseSet[];
 
+    submitting: boolean;
+
     exercises = [
         'Lateral pulldown',
         'Chest press'
@@ -40,9 +42,23 @@ export class AppComponent {
 
     saveSet() {
         console.log(this.set)
+        
+        var newRecord = !this.set.persisted();
+        this.submitting = true;
+
         this._setService.saveSet(this.set)
             .subscribe(
-                set => this.reset(),
+                set => {
+                    this.sets.unshift(set);
+
+                    if (newRecord) {
+                        this.set = set.again();
+                    } else {
+                        this.reset()
+                    }
+
+                    this.submitting = false;
+                },
                 error => console.log(error)
             )
     }

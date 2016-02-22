@@ -41,7 +41,7 @@
 
             <fieldset class="form-group">
                 <button type="submit" class="btn btn-primary"
-                        [disabled]="!setForm.form.valid">
+                        [disabled]="!setForm.form.valid || submitting">
                     {{set.persisted() ? 'Update' : 'Add'}} Set
                 </button>
             </fieldset>
