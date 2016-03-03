@@ -49,6 +49,22 @@
     </div>
 </div>
 
+<h2>Old Exercises</h2>
+
+<div class="row" *ngFor="#oldSet of sets | oldExercises">
+    <div class="col-xs-12">
+        {{oldSet.created_at | date:'medium'}}
+        {{oldSet.exercise_name}}
+        {{oldSet.weight}}x{{oldSet.reps}}
+
+        <button class="btn btn-secondary" (click)="again(oldSet)">
+            Again
+        </button>
+    </div>
+</div>
+
+<h2>All Sets</h2>
+
 <div class="row" *ngFor="#oldSet of sets">
     <div class="col-xs-12">
         {{oldSet.created_at | date:'medium'}}

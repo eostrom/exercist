@@ -23,6 +23,7 @@ export class SetService {
             .map(res =>
                 res.json().map(this.jsonToSet)
             )
+            .startWith([])
             .catch(this.handleError);
     }
 

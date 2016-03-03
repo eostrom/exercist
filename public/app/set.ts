@@ -5,7 +5,8 @@ export class ExerciseSet {
     exercise_name: string;
     weight: number;
     reps: number;
-
+    created_at: number;
+    
     persisted() : boolean {
         return this.id != null;
     }

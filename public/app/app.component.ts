@@ -3,6 +3,7 @@ import {HTTP_PROVIDERS}    from 'angular2/http';
 import {NgForm}    from 'angular2/common';
 import {ExerciseSet}       from './set';
 import {SetService} from './set.service';
+import {OldExercisesPipe} from './old-exercises.pipe'
 
 @Component({
     selector: 'my-app',
@@ -11,6 +12,9 @@ import {SetService} from './set.service';
     styles: [`
       h1 { color: red; }
     `],
+    pipes: [
+        OldExercisesPipe
+    ],
     providers: [
         HTTP_PROVIDERS,
         SetService
@@ -52,7 +56,7 @@ export class AppComponent {
                     this.sets.unshift(set);
 
                     if (newRecord) {
-                        this.set = set.again();
+                        this.again(set);
                     } else {
                         this.reset()
                     }
@@ -61,5 +65,9 @@ export class AppComponent {
                 },
                 error => console.log(error)
             )
+    }
+    
+    again(set) {
+        this.set = set.again() 
     }
 }
