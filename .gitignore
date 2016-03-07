@@ -26,3 +26,6 @@
 public/app/**/*.js
 public/app/**/*.js.map
 /typings
+
+# Local development environment
+.env
